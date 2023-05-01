@@ -1,6 +1,6 @@
 interface ProductInput {
   name: string
-  description?: string
+  description: string | null
   price: number
   quantity: number
   storeId: number
