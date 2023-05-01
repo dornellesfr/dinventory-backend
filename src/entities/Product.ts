@@ -1,5 +1,4 @@
-interface Product {
-  id: number
+interface ProductInput {
   name: string
   description?: string
   price: number
@@ -7,4 +6,11 @@ interface Product {
   storeId: number
 }
 
-export default Product;
+interface Product extends ProductInput {
+  id: number
+}
+
+export type {
+  ProductInput,
+  Product
+};
