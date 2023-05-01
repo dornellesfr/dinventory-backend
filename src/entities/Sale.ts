@@ -1,8 +1,7 @@
 import type { Product } from './Product';
-import type Store from './Store';
+import type { Store } from './Store';
 
-interface Sale {
-  id: number
+interface SaleInput {
   date: number
   quantitySold: number
   totalValue: number
@@ -10,4 +9,11 @@ interface Sale {
   storeId: Store
 }
 
-export default Sale;
+interface Sale extends SaleInput {
+  id: number
+}
+
+export type {
+  SaleInput,
+  Sale
+};

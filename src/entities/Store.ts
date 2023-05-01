@@ -1,8 +1,11 @@
 import type { Product } from './Product';
-import type Sale from './Sale';
+import type { Sale } from './Sale';
 
-interface Store {
+interface StoreInput {
   id: number
+}
+
+interface Store extends StoreInput {
   name: string
   password: string
   address?: string
@@ -11,4 +14,7 @@ interface Store {
   sales: Sale[]
 }
 
-export default Store;
+export type {
+  Store,
+  StoreInput
+};
