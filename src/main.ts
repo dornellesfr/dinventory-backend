@@ -1,1 +1,3 @@
-import { Express } from 'express';
+import App from './app';
+
+app.listen()
