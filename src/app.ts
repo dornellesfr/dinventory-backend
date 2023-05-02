@@ -2,6 +2,7 @@ import express, { type Express } from 'express';
 import cors from 'cors';
 import productRoutes from './routes/ProductRoute';
 import storeRouter from './routes/StoreRouter';
+import errorMiddleware from './middlewares/ErrorMiddleware';
 
 function appFactory(): Express {
   const app = express();
@@ -12,6 +13,7 @@ function appFactory(): Express {
   app.use('/store', storeRouter);
   app.use('/product', productRoutes);
 
+  app.use(errorMiddleware);
   return app;
 }
 

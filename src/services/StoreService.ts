@@ -1,4 +1,4 @@
-import type { Store } from '../entities/Store';
+import type { Store, StoreInput } from '../entities/Store';
 import StoreModel from '../models/StoreModel';
 
 class StoreService {
@@ -10,6 +10,10 @@ class StoreService {
   async findAll(): Promise<Store[]> {
     const allStores = await this.model.findAll();
     return allStores;
+  }
+
+  async create(store: StoreInput): Promise<void> {
+    await this.model.create(store);
   }
 }
 
