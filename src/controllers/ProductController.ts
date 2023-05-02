@@ -8,7 +8,7 @@ class ProductController {
   }
 
   async findAll(_req: Request, res: Response): Promise<Response> {
-    const result = this.service.findAll();
+    const result = await this.service.findAll();
     return res.status(200).json(result);
   }
 }
