@@ -5,6 +5,6 @@ const productRoutes = Router();
 
 const productController = new ProductController();
 
-productRoutes.get('/', (req, res) => (productController.findAll(req, res) as unknown) as RequestHandler);
+productRoutes.get('/', productController.findAll as RequestHandler);
 
 export default productRoutes;
