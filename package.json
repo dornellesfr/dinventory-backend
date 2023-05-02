@@ -11,6 +11,9 @@
     "dev": "tsx watch src/main.ts",
     "build": "tsc"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^4.13.0",
     "cors": "^2.8.5",

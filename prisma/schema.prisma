@@ -18,6 +18,7 @@ model Store {
   phone    String?
   products Product[]
   sales    Sale[]
+  admin    Boolean
 }
 
 model Product {
