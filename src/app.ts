@@ -9,7 +9,7 @@ function appFactory(): Express {
   app.use(cors());
   app.use(express.json());
 
-  app.use('/login', storeRouter);
+  app.use('/store', storeRouter);
   app.use('/product', productRoutes);
 
   return app;
