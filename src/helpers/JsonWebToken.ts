@@ -13,7 +13,9 @@ class Jwt {
   }
 
   createToken(data: loginStore): string {
-    const token = sign(data, this._SECRET, { algorithm: 'HS256', expiresIn: '2d' });
+    const { name, password } = data;
+    const store = { name, password };
+    const token = sign(store, this._SECRET, { algorithm: 'HS256', expiresIn: '2d' });
 
     return token;
   }
