@@ -1,4 +1,5 @@
 import express, { type Express } from 'express';
+import 'express-async-errors';
 import cors from 'cors';
 import productRoutes from './routes/ProductRoute';
 import storeRouter from './routes/StoreRouter';
