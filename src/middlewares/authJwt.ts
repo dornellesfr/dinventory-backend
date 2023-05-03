@@ -5,7 +5,7 @@ import type { JwtPayload } from 'jsonwebtoken';
 
 const jwt = new Jwt();
 
-async function validateToken(req: Request, res: Response, next: NextFunction): Promise<void> {
+function validateToken(req: Request, _res: Response, next: NextFunction): void {
   const token = req.headers.authorization;
 
   if (token == null) {

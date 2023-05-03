@@ -16,8 +16,13 @@ class StoreModel implements StoreRepository {
     await Prisma.store.delete({ where: { id: storeId } });
   }
 
-  async findStoreById(storeId: number): Promise<Store | null> {
+  async findById(storeId: number): Promise<Store | null> {
     const store = await Prisma.store.findUnique({ where: { id: storeId } });
+    return store as Store;
+  }
+
+  async findByName(name: string): Promise<Store> {
+    const store = await Prisma.store.findFirst({ where: { name } });
     return store as Store;
   }
 
