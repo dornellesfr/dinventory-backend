@@ -24,6 +24,24 @@ class StoreService {
       await this.model.create(store);
     }
   }
+
+  async removeStore(storeId: number): Promise<void> {
+    const result = await this.model.findStoreById(storeId);
+
+    if (result == null) throw new ErrorApi('Store not found', 404);
+    else {
+      await this.model.removeStore(storeId);
+    }
+  }
+
+  async update(store: Store): Promise<void> {
+    const result = await this.model.findStoreById(store.id);
+
+    if (result == null) throw new ErrorApi('Store not found', 404);
+    else {
+      await this.model.update(store);
+    }
+  }
 }
 
 export default StoreService;

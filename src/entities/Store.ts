@@ -1,6 +1,9 @@
-interface StoreInput {
+interface loginStore {
   name: string
   password: string
+}
+
+interface StoreInput extends loginStore {
   address?: string
   phone?: string
   admin: boolean
@@ -12,5 +15,6 @@ interface Store extends StoreInput {
 
 export type {
   Store,
-  StoreInput
+  StoreInput,
+  loginStore
 };
