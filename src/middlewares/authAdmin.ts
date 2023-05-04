@@ -5,9 +5,9 @@ import ErrorApi from '../helpers/ErrorApi';
 const storeService = new StoreService();
 
 async function validateAdminUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-  const { name } = req.body;
+  const { email } = req.body;
 
-  const store = await storeService.findByName(name);
+  const store = await storeService.findByEmail(email);
   if (store.admin) {
     next();
   } else {
