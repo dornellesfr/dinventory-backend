@@ -6,6 +6,7 @@ async function main(): Promise<void> {
     data: {
       name: 'admin',
       password: 'admin',
+      email: 'admin@admin.com',
       admin: true
     }
   });

@@ -1,9 +1,10 @@
 interface loginStore {
-  name: string
+  email: string
   password: string
 }
 
 interface StoreInput extends loginStore {
+  name: string
   address?: string
   phone?: string
   admin: boolean

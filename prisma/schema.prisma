@@ -14,11 +14,12 @@ model Store {
   id       Int       @id @default(autoincrement())
   name     String
   password String
+  admin    Boolean
+  email    String
   address  String?
   phone    String?
   products Product[]
   sales    Sale[]
-  admin    Boolean
 }
 
 model Product {
