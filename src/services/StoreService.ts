@@ -1,11 +1,14 @@
 import type { Store, StoreInput } from '../entities/Store';
 import ErrorApi from '../helpers/ErrorApi';
 import StoreModel from '../models/StoreModel';
+import BCrypt from '../helpers/BCrypt';
 
 class StoreService {
   readonly model: StoreModel;
+  private readonly _encode: BCrypt;
   constructor() {
     this.model = new StoreModel();
+    this._encode = new BCrypt();
   }
 
   async findAll(): Promise<Store[]> {
@@ -14,8 +17,13 @@ class StoreService {
   }
 
   async create(store: StoreInput): Promise<void> {
-    const storeName = await this.model.findByName(store.name);
-    if (storeName == null) {
+    const email = await this.model.findByName(store.email);
+
+    if (email == null) {
+      const { password } = store;
+      const hash = this._encode.encryptPassword(password);
+      store.password = hash;
+
       if (!store.admin) {
         const data = { ...store, admin: false };
         await this.model.create(data);
@@ -23,7 +31,7 @@ class StoreService {
         await this.model.create(store);
       }
     } else {
-      throw new ErrorApi('Store Name already exists', 400);
+      throw new ErrorApi('This email is already registered', 400);
     }
   }
 
