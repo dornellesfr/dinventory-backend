@@ -7,6 +7,7 @@ interface StoreRepository {
   removeStore: (storeId: number) => Promise<void>
   findById: (storeId: number) => Promise<Store | null>
   findByName: (name: string) => Promise<Store | null | undefined>
+  findByEmail: (email: string) => Promise<Store | null | undefined>
 }
 
 export default StoreRepository;

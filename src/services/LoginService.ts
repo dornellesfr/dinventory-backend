@@ -10,14 +10,14 @@ class loginService {
     this._jwt = new Jwt();
   }
 
-  async validateLogin(name: string, password: string): Promise<string> {
-    const store = await storeService.findByName(name);
+  async validateLogin(email: string, password: string): Promise<string> {
+    const store = await storeService.findByEmail(email);
 
-    if (store.name === name || store.password === password) {
-      const token = this._jwt.createToken({ name, password });
+    if (store.email === email && store.password === password) {
+      const token = this._jwt.createToken({ email, password });
       return token;
     } else {
-      throw new ErrorApi('User or password not valid', 404);
+      throw new ErrorApi('Email or password not valid', 404);
     }
   }
 }

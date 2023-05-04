@@ -26,6 +26,11 @@ class StoreModel implements StoreRepository {
     return store as Store;
   }
 
+  async findByEmail(email: string): Promise<Store | null | undefined> {
+    const store = await Prisma.store.findFirst({ where: { email } });
+    return store as Store;
+  }
+
   async update(store: Store): Promise<void> {
     const { id, admin, email, name, password, address, phone } = store;
     await Prisma.store.update({ where: { id }, data: { admin, name, email, password, address, phone } });

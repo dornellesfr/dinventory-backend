@@ -45,6 +45,11 @@ class StoreService {
     }
   }
 
+  async findByEmail(email: string): Promise<Store> {
+    const result = await this.model.findByEmail(email);
+    return result as Store;
+  }
+
   async findByName(name: string): Promise<Store> {
     const result = await this.model.findByName(name);
     return result as Store;
