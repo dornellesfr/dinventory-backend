@@ -6,7 +6,7 @@ interface StoreRepository {
   update: (store: Store) => Promise<void>
   removeStore: (storeId: number) => Promise<void>
   findById: (storeId: number) => Promise<Store | null>
-  findByName: (name: string) => Promise<Store>
+  findByName: (name: string) => Promise<Store | null | undefined>
 }
 
 export default StoreRepository;
