@@ -14,16 +14,16 @@ class StoreService {
   }
 
   async create(store: StoreInput): Promise<void> {
-    if (store.name.length < 1) throw new ErrorApi('Name is required', 400);
-    if (store.password.length < 1) throw new ErrorApi('Password is required', 400);
     const storeName = await this.model.findByName(store.name);
-    if (storeName == null) throw new ErrorApi('Store Name already exists', 400);
-
-    if (!store.admin) {
-      const data = { ...store, admin: false };
-      await this.model.create(data);
+    if (storeName == null) {
+      if (!store.admin) {
+        const data = { ...store, admin: false };
+        await this.model.create(data);
+      } else {
+        await this.model.create(store);
+      }
     } else {
-      await this.model.create(store);
+      throw new ErrorApi('Store Name already exists', 400);
     }
   }
 
@@ -47,7 +47,7 @@ class StoreService {
 
   async findByName(name: string): Promise<Store> {
     const result = await this.model.findByName(name);
-    return result;
+    return result as Store;
   }
 }
 
