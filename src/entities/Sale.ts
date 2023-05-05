@@ -1,12 +1,9 @@
-import type { Product } from './Product';
-import type { Store } from './Store';
-
 interface SaleInput {
-  date: number
   quantitySold: number
   totalValue: number
-  productId: Product
-  storeId: Store
+  productId: number
+  storeId: number
+  date: Date
 }
 
 interface Sale extends SaleInput {

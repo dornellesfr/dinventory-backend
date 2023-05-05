@@ -5,6 +5,8 @@ interface ProductRepository {
   findAll: () => Promise<Product[]>
   update: (product: Product) => Promise<void>
   removeProduct: (productId: number) => Promise<void>
+  findProductsByStore: (storeId: number) => Promise<Product[]>
+  findById: (productId: number) => Promise<Product | undefined>
 }
 
 export default ProductRepository;
