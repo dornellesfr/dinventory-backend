@@ -4,15 +4,15 @@ import BCrypt from '../helpers/BCrypt';
 import Prisma from '../models/Prisma';
 
 class StoreService {
-  readonly model;
+  private readonly _model;
   private readonly _encode: BCrypt;
   constructor() {
-    this.model = Prisma;
+    this._model = Prisma;
     this._encode = new BCrypt();
   }
 
   async findAll(): Promise<Store[]> {
-    const allStores = await this.model.store.findMany();
+    const allStores = await this._model.store.findMany();
     return allStores as Store[];
   }
 
@@ -27,9 +27,9 @@ class StoreService {
 
     if (!store.admin) {
       const data = { ...store, admin: false };
-      await this.model.store.create({ data });
+      await this._model.store.create({ data });
     } else {
-      await this.model.store.create({ data: store });
+      await this._model.store.create({ data: store });
     }
   }
 
@@ -37,9 +37,8 @@ class StoreService {
     const result = await this.findById(storeId);
 
     if (result == null) throw new ErrorApi('Store not found', 404);
-    else {
-      await this.model.store.delete({ where: { id: storeId } });
-    }
+
+    await this._model.store.delete({ where: { id: storeId } });
   }
 
   async update(store: Store): Promise<void> {
@@ -48,21 +47,21 @@ class StoreService {
 
     if (result === null) throw new ErrorApi('Store not found', 404);
 
-    await this.model.store.update({ where: { id }, data: { admin, name, email, password, address, phone } });
+    await this._model.store.update({ where: { id }, data: { admin, name, email, password, address, phone } });
   }
 
   async findByEmail(email: string): Promise<Store> {
-    const result = await this.model.store.findFirst({ where: { email } });
+    const result = await this._model.store.findFirst({ where: { email } });
     return result as Store;
   }
 
   async findByName(name: string): Promise<Store> {
-    const result = await this.model.store.findFirst({ where: { name } });
+    const result = await this._model.store.findFirst({ where: { name } });
     return result as Store;
   }
 
   async findById(storeId: number): Promise<Store | null> {
-    const store = await this.model.store.findUnique({ where: { id: storeId } });
+    const store = await this._model.store.findUnique({ where: { id: storeId } });
     return store as Store;
   }
 }

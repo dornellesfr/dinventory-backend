@@ -1,4 +1,4 @@
-interface ProductInput {
+interface ProductCreate {
   name: string
   description: string | null
   price: number
@@ -6,11 +6,11 @@ interface ProductInput {
   storeId: number
 }
 
-interface Product extends ProductInput {
+interface Product extends ProductCreate {
   id: number
 }
 
 export type {
-  ProductInput,
+  ProductCreate,
   Product
 };

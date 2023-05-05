@@ -1,4 +1,3 @@
-import ErrorApi from '../helpers/ErrorApi';
 import StoreService from '../services/StoreService';
 import type { Request, Response } from 'express';
 
@@ -21,7 +20,6 @@ class StoreController {
 
   async removeStore(req: Request, res: Response): Promise<Response> {
     const { id } = req.body;
-    if (id == null) throw new ErrorApi('Store id is required', 400);
 
     await this.service.removeStore(Number(id));
     return res.status(200).json({ message: 'Store removed' });
