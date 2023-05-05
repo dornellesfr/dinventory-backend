@@ -16,11 +16,13 @@ class loginService {
   async validateLogin(email: string, password: string): Promise<string> {
     const store = await storeService.findByEmail(email);
 
-    if (store.email === email && this._bcrypt.comparePassword(password, store.password)) {
-      const token = this._jwt.createToken({ email, password });
+    if (store.email !== email) throw new ErrorApi('Email not valid', 404);
+
+    if (this._bcrypt.comparePassword(password, store.password)) {
+      const token = this._jwt.createToken({ email: store.email, password: store.password, admin: store.admin, name: store.name });
       return token;
     } else {
-      throw new ErrorApi('Email or password not valid', 404);
+      throw new ErrorApi('Password not valid', 404);
     }
   }
 }
