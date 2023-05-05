@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import Prisma from '../src/models/db/Prisma';
+import Prisma from '../src/models/Prisma';
 
 async function main(): Promise<void> {
   await Prisma.store.create({

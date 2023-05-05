@@ -1,19 +1,11 @@
 import type { Product } from '../entities/Product';
-import ProductModel from '../models/ProductModel';
+import type ProductRepository from '../repositories/product-respositories';
+import Prisma from '../models/Prisma';
 
-class ProductService {
-  readonly model: ProductModel;
+class ProductService implements ProductRepository {
+  private readonly _model;
   constructor() {
-    this.model = new ProductModel();
-  }
-
-  async findAll(): Promise<Product[] | string> {
-    try {
-      const result = await this.model.findAll();
-      return result;
-    } catch (error) {
-      return (error as Error).message;
-    }
+    this._model = Prisma;
   }
 }
 

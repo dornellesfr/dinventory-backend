@@ -1,66 +1,69 @@
 import type { Store, StoreInput } from '../entities/Store';
 import ErrorApi from '../helpers/ErrorApi';
-import StoreModel from '../models/StoreModel';
 import BCrypt from '../helpers/BCrypt';
+import Prisma from '../models/Prisma';
 
 class StoreService {
-  readonly model: StoreModel;
+  readonly model;
   private readonly _encode: BCrypt;
   constructor() {
-    this.model = new StoreModel();
+    this.model = Prisma;
     this._encode = new BCrypt();
   }
 
   async findAll(): Promise<Store[]> {
-    const allStores = await this.model.findAll();
-    return allStores;
+    const allStores = await this.model.store.findMany();
+    return allStores as Store[];
   }
 
   async create(store: StoreInput): Promise<void> {
-    const email = await this.model.findByName(store.email);
+    const storeFinded = await this.findByEmail(store.email);
 
-    if (email == null) {
-      const { password } = store;
-      const hash = this._encode.encryptPassword(password);
-      store.password = hash;
+    if (storeFinded.email.length > 0) throw new ErrorApi('This email is already registered', 400);
 
-      if (!store.admin) {
-        const data = { ...store, admin: false };
-        await this.model.create(data);
-      } else {
-        await this.model.create(store);
-      }
+    const { password } = store;
+    const hash = this._encode.encryptPassword(password);
+    store.password = hash;
+
+    if (!store.admin) {
+      const data = { ...store, admin: false };
+      await this.model.store.create({ data });
     } else {
-      throw new ErrorApi('This email is already registered', 400);
+      await this.model.store.create({ data: store });
     }
   }
 
   async removeStore(storeId: number): Promise<void> {
-    const result = await this.model.findById(storeId);
+    const result = await this.findById(storeId);
 
     if (result == null) throw new ErrorApi('Store not found', 404);
     else {
-      await this.model.removeStore(storeId);
+      await this.model.store.delete({ where: { id: storeId } });
     }
   }
 
   async update(store: Store): Promise<void> {
-    const result = await this.model.findById(store.id);
+    const { id, admin, email, name, password, address, phone } = store;
+    const result = await this.findById(store.id);
 
-    if (result == null) throw new ErrorApi('Store not found', 404);
-    else {
-      await this.model.update(store);
-    }
+    if (result === null) throw new ErrorApi('Store not found', 404);
+
+    await this.model.store.update({ where: { id }, data: { admin, name, email, password, address, phone } });
   }
 
   async findByEmail(email: string): Promise<Store> {
-    const result = await this.model.findByEmail(email);
+    const result = await this.model.store.findFirst({ where: { email } });
     return result as Store;
   }
 
   async findByName(name: string): Promise<Store> {
-    const result = await this.model.findByName(name);
+    const result = await this.model.store.findFirst({ where: { name } });
     return result as Store;
+  }
+
+  async findById(storeId: number): Promise<Store | null> {
+    const store = await this.model.store.findUnique({ where: { id: storeId } });
+    return store as Store;
   }
 }
 

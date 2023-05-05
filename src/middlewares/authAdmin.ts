@@ -12,7 +12,6 @@ async function validateAdminUser(req: Request, res: Response, next: NextFunction
 
   const accesKey = jwt.verifyToken(authorization) as Partial<StoreInput>;
 
-  console.log(accesKey);
   const { admin } = accesKey;
 
   if (admin === true) {
