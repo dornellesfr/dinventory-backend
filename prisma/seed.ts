@@ -5,7 +5,7 @@ async function main(): Promise<void> {
   await Prisma.store.create({
     data: {
       name: 'admin',
-      password: 'admin',
+      password: '$2b$10$XqBDdMxmmAO.BJPUZ78ypONwwrcCkNLKA9xwuWJ4bV.osReVIsmtK',
       email: 'admin@admin.com',
       admin: true
     }
