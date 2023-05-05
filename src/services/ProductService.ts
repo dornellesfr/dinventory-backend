@@ -11,7 +11,18 @@ class ProductService implements ProductRepository {
 
   async findById(productId: number): Promise<Product | undefined > {
     const product = await this._model.product.findUnique({ where: { id: productId } });
+
+    if (product == null) throw new ErrorApi('Product not found', 404);
+
     return product as Product;
+  }
+
+  async findProductsByStore(storeId: number): Promise<Product[]> {
+    const products = await this._model.product.findMany({ where: { storeId } });
+
+    if (products === null) throw new ErrorApi('Products not found', 404);
+
+    return products as Product[];
   }
 
   async findAll(): Promise<Product[]> {

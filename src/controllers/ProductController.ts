@@ -39,6 +39,12 @@ class ProductController {
     const result = await this.service.findById(Number(id));
     return res.status(200).json(result);
   }
+
+  async getProductsByStore(req: Request, res: Response): Promise<Response> {
+    const { storeId } = req.params;
+    const result = await this.service.findProductsByStore(Number(storeId));
+    return res.status(200).json(result);
+  }
 }
 
 export default ProductController;
