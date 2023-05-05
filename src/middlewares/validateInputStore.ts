@@ -1,7 +1,7 @@
 import ErrorApi from '../helpers/ErrorApi';
 import type { Request, Response, NextFunction } from 'express';
 
-function validateInputsStore(req: Request, res: Response, next: NextFunction): void {
+function validateInputsStore(req: Request, _res: Response, next: NextFunction): void {
   const { email, password, name } = req.body;
 
   const objInputs = { email, password, name };

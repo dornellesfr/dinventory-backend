@@ -4,7 +4,7 @@ import cors from 'cors';
 import productRoutes from './routes/ProductRoute';
 import storeRouter from './routes/StoreRouter';
 import errorMiddleware from './middlewares/ErrorMiddleware';
-import loginRouter from './routes/loginRoute';
+import loginRouter from './routes/LoginRoute';
 
 function appFactory(): Express {
   const app = express();
