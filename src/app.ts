@@ -5,6 +5,7 @@ import productRoutes from './routes/ProductRoute';
 import storeRouter from './routes/StoreRouter';
 import errorMiddleware from './middlewares/ErrorMiddleware';
 import loginRouter from './routes/LoginRoute';
+import saleRouter from './routes/SaleRoute';
 
 function appFactory(): Express {
   const app = express();
@@ -15,6 +16,7 @@ function appFactory(): Express {
   app.use('/store', storeRouter);
   app.use('/product', productRoutes);
   app.use('/login', loginRouter);
+  app.use('/sale', saleRouter);
 
   app.use(errorMiddleware);
   return app;

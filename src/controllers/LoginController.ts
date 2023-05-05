@@ -1,5 +1,4 @@
 import type { Request, Response } from 'express';
-// import ErrorApi from '../helpers/ErrorApi';
 import LoginService from '../services/LoginService';
 
 const loginService = new LoginService();

@@ -1,5 +1,5 @@
 import { type RequestHandler, Router } from 'express';
-import LoginController from '../controllers/loginController';
+import LoginController from '../controllers/LoginController';
 
 const loginRouter = Router();
 

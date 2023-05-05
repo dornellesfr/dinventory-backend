@@ -1,6 +1,7 @@
 import Prisma from '../models/Prisma';
 import type SaleRepository from '../repositories/sale-respositories';
 import type { Sale, SaleInput } from '../entities/Sale';
+import ErrorApi from '../helpers/ErrorApi';
 
 class SaleService implements SaleRepository {
   private readonly _model;
@@ -31,6 +32,12 @@ class SaleService implements SaleRepository {
     if (sale == null) throw new Error('Sale not found');
 
     await this._model.sale.delete({ where: { id: saleId } });
+  }
+
+  async findById(saleId: number): Promise<Sale> {
+    const sale = await this._model.sale.findFirst({ where: { id: saleId } });
+    if (sale == null) throw new ErrorApi('Sale not found', 404);
+    return sale as Sale;
   }
 
   async getSalesByStore(storeId: number): Promise<Sale[]> {
