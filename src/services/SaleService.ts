@@ -1,4 +1,4 @@
-import Prisma from '../models/Prisma';
+import Prisma from '../database/Prisma';
 import type SaleRepository from '../repositories/sale-respositories';
 import type { Sale, SaleInput } from '../entities/Sale';
 import ErrorApi from '../helpers/ErrorApi';

@@ -1,6 +1,6 @@
 import type { Product, ProductCreate } from '../entities/Product';
 import type ProductRepository from '../repositories/product-respositories';
-import Prisma from '../models/Prisma';
+import Prisma from '../database/Prisma';
 import ErrorApi from '../helpers/ErrorApi';
 
 class ProductService implements ProductRepository {

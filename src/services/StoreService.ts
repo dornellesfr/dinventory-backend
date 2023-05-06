@@ -1,7 +1,7 @@
 import type { Store, StoreInput } from '../entities/Store';
 import ErrorApi from '../helpers/ErrorApi';
 import BCrypt from '../helpers/BCrypt';
-import Prisma from '../models/Prisma';
+import Prisma from '../database/Prisma';
 
 class StoreService {
   private readonly _model;
