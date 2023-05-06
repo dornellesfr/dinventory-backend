@@ -7,13 +7,13 @@
     "node": "18"
   },
   "scripts": {
-    "prestart": "npx prima migrate dev && npx prisma db seed",
+    "prestart": "npx prisma migrate deploy && npx prisma db seed",
     "start": "node dist/main.js",
     "dev": "tsx watch src/main.ts",
     "build": "tsc"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx ./src/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
