@@ -1,2 +1,224 @@
-# dinventory
-This project has objective to control a store's inventory
+
+# dInventory
+
+Este projeto tem como objetivo a criação de uma api REST com endpoints para a criação, leitura, manutenção e exclusão de estoques de lojas. A api conta com uma sessão de produtos da loja e sessão de vendas da loja também.
+
+
+## Rodando localmente
+
+#### Necessário um container mysql ou ter o mysql instalado no seu computador e rodando.
+
+Comando do docker para rodar o mysql:
+
+`
+docker run --name diventory -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql
+`
+
+Clone o projeto
+
+```bash
+  git clone git@github.com:dornellesfr/dinventory-backend.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd dinventory-backend
+```
+
+Instale as dependências
+
+```bash
+  npm install
+```
+
+Inicie o servidor no ambiente de desenvolvimento
+
+```bash
+  npm run dev
+```
+
+
+## Documentação da API
+
+A URL base da API no momento é: https://diventory-api-production.up.railway.app/
+
+### Recursos
+
+#### `/login`
+**Obrigatório.** Este recurso permite fazer o login. Com o retorno esperado, haverá um token de autenticação para uso das próximas rotas.
+
+Alguns recursos estão disponíveis apenas para admin. Você pode entrar em contato comigo caso queira testar ou saber mais sobre:
+
+[Whatsapp](https://api.whatsapp.com/send?phone=5551997463822)
+
+[Instagram](https://www.instagram.com/dornellesfr/)
+
+#### Endpoints da rota /login:
+* `POST / ` -> Faz o login retornando um token para autenticação.
+    
+  Rota livre para qualquer pessoa fazer login.
+
+    Parâmetros pelo body da requisição:
+      
+      {
+        "name": "Test Store",
+        "email": "test@test.com",
+        "password": "dattebayo"
+      }
+
+    Retorna:
+      
+      {
+        "message": "Store created"
+      }
+
+
+#### `/store`
+
+Este recurso permite a manipulação total das lojas cadastradas no banco de dados.
+
+#### Endpoints da rota /store:
+* `GET / ` -> Faz a consulta para todas as lojas cadastradas.
+
+  Essa rota só pode ser acessada com usuário admininistrador.
+
+    Retorna:
+
+      [
+        ...
+        {
+          "id": 3,
+          "name": "Test Store",
+          "password": "{encryptedpassword}",
+          "admin": false,
+          "email": "test@test.com",
+          "address": null,
+          "phone": null
+        }
+        ...
+      ]
+          
+* `POST / ` -> Cria uma loja no banco de dados.
+
+  Essa rota só pode ser acessada com usuário admininistrador.
+
+    Parâmetros:
+
+      {
+        "email": "test@test.com",
+        "name": "Test Store",
+        "password": "dattebayo"
+      }
+
+    Retorna: 
+
+      {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RpbmdAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlN1ZYZWJUQlV5Q1NkLkRVd1ZuMXh1bWNBMDF1YkltcGhJQVN0bVltL3NtU1M1eXk3YVAuMiIsIm5hbWUiOiJUZXN0IFN0b3JlIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM0MDc4MDgsImV4cCI6MTY4Mzc1MzQwOH0.NERhRtOesimQuUVi41kHmSUpe3i6-OL941HQL9G8wc0"
+      }
+    
+    * É válido por 5 dias cada token, você pode gerar o seu fazendo a mesma requisição com login e senha.
+
+* `PUT /` -> Atualiza a loja as características das lojas.
+
+  Essa rota só pode ser acessada com usuário admininistrador.
+
+    Parâmetros: 
+
+      {
+        "id": 3
+      }
+
+  O único obrigatório é esse, o restante é o que você gostaria de trocar, como: password, email, name, phone e address.
+
+    Retorno:
+
+      {
+        "message": "Store updated"
+      }
+
+* `DELETE /` -> Remove uma loja do banco de dados.
+
+  Essa rota só pode ser acessada com usuário admininistrador.
+
+    Parâmetros: 
+
+      {
+        "id": 3
+      }
+      
+    Retorno:
+
+      {
+        "message": "Store removed"
+      }
+
+#### Endpoints da rota /product:
+* `GET / ` -> Faz a consulta de todos os produtos cadastrados.,
+
+  Essa rota só pode ser acessada com usuário admininistrador.
+
+    Retorno:
+
+      [
+        {
+          "id": 1,
+          "name": "Teclado mecânico",
+          "description": "Teclado antighost com rgb", // nullable
+          "price": 175.9,
+          "quantity": 20,
+          "storeId": 3
+        },
+        ...
+      ]
+
+* `POST / ` -> Cadastra um novo produto na loja selecionada.
+
+  Essa rota pode ser usada por qualquer usuário logado.
+
+    Parâmetros:
+
+      {
+        "name": "Mouse sem fio",
+        "description": "Mouse óptico sem fio",
+        "price": 50,
+        "quantity": 10,
+        "storeId": 3
+      }
+
+    Retorno:
+
+      {
+        "message": "Product created"
+      }
+
+* `PUT / ` -> Altera um produto da loja selecionada.
+
+  Essa rota pode ser usada por qualquer usuário logado.
+
+    Parâmetros:
+
+      {
+        "id": 1,
+        "name": "Mouse gamer",
+        "description": "Mouse óptico rgb",
+        "price": 200,
+        "quantity": 10,
+        "storeId": 3
+      }
+
+    Retorno:
+
+      {
+        "message": "Product updated"
+      }
+
+## Aprendizados
+
+Fortaleci meu conhecimento sobre uma arquiterura mais limpa de código e de possibilidade de escalá-la, fortifiquei meu conhecimento sobre TypeScript e também utilizei pela primeira vez o Prisma ORM, o qual adaptei superfácil, sendo uma ótima opção além do sequelize. Meus desafios foram a organização do banco de dados, como torná-lo objetivo e como modelá-lo. Além disso, pensar na estruta geral do código e seus comportamentos foi uma tarefa árdua também para começar algo do zero.
+
+
+## Stack utilizada
+
+**Back-end:** Node, Express, TypeScript, Prisma e MySQL
+
