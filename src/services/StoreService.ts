@@ -19,10 +19,9 @@ class StoreService {
   async create(store: StoreInput): Promise<void> {
     const storeFinded = await this.findByEmail(store.email);
 
-    if (storeFinded.email.length > 0) throw new ErrorApi('This email is already registered', 400);
+    if (storeFinded !== null) throw new ErrorApi('This email is already registered', 400);
 
-    const { password } = store;
-    const hash = this._encode.encryptPassword(password);
+    const hash = this._encode.encryptPassword(store.password);
     store.password = hash;
 
     if (!store.admin) {

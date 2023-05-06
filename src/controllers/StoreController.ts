@@ -1,3 +1,4 @@
+import type { StoreInput } from '../entities/Store';
 import StoreService from '../services/StoreService';
 import type { Request, Response } from 'express';
 
@@ -13,7 +14,9 @@ class StoreController {
   }
 
   async create(req: Request, res: Response): Promise<Response> {
-    const store = req.body;
+    const { name, email, password, admin } = req.body;
+    const store: StoreInput = { name, email, password, admin };
+
     await this.service.create(store);
     return res.status(201).json({ message: 'Store created' });
   }
