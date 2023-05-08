@@ -44,9 +44,21 @@ Inicie o servidor no ambiente de desenvolvimento
 ```
 
 
+## Variáveis de Ambiente
+
+Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env
+
+`MYSQL_URL` -> URL de acesso ao banco de dados
+
+`PORT` -> Porta que será executado no seu navegador em ambiente de desenvolvimento
+
+`SECRETJWT` -> palavra secreta para sua aplicação
+
+
+
 ## Documentação da API
 
-A URL base da API no momento é: https://diventory-api-production.up.railway.app/
+A URL base da API, no momento, rodando em ambiente de produção é: https://diventory-api-production.up.railway.app/
 
 ### Recursos
 
