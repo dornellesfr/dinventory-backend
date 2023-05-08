@@ -4,6 +4,11 @@
 Este projeto tem como objetivo a criação de uma api REST com endpoints para a criação, leitura, manutenção e exclusão de estoques de lojas. A api conta com uma sessão de produtos da loja e sessão de vendas da loja também.
 
 
+## Aprendizados
+
+Fortaleci meu conhecimento sobre uma arquiterura mais limpa de código e de possibilidade de escalá-la, fortifiquei meu conhecimento sobre TypeScript e também utilizei pela primeira vez o Prisma ORM, o qual adaptei superfácil, sendo uma ótima opção além do sequelize. Meus desafios foram a organização do banco de dados, como torná-lo objetivo e como modelá-lo. Além disso, pensar na estruta geral do código e seus comportamentos foi uma tarefa árdua também para começar algo do zero.
+
+
 ## Rodando localmente
 
 #### Necessário um container mysql ou ter o mysql instalado no seu computador e rodando.
@@ -274,66 +279,64 @@ Este recurso permite a manipulação total das lojas cadastradas no banco de dad
       ]
 
 #### Endpoints da rota /sale:
+
 * `GET / ` -> Faz a consulta de todas as vendas cadastradas.
 
   Essa rota só pode ser acessada com usuário admininistrador.
 
     Retorno:
 
-      [
+    [
         {
-          "id": 1,
-          "name": "Teclado mecânico",
-          "description": "Teclado antighost com rgb", // nullable
-          "price": 175.9,
-          "quantity": 20,
-          "storeId": 3
-        },
-        ...
-      ]
+            "id": 1,
+            "date": "2023-05-08T14:42:32.382Z",
+            "quantitySold": 1,
+            "totalValue": 200,
+            "productId": 1,
+            "storeId": 3
+        }
+    ]
 
-* `POST / ` -> Cadastra um novo produto na loja selecionada.
-
-  Essa rota pode ser usada por qualquer usuário logado.
-
-    Parâmetros:
-
-      {
-        "name": "Mouse sem fio",
-        "description": "Mouse óptico sem fio",
-        "price": 50,
-        "quantity": 10,
-        "storeId": 3
-      }
-
-    Retorno:
-
-      {
-        "message": "Product created"
-      }
-
-* `PUT / ` -> Altera um produto da loja selecionada.
+* `POST / ` -> Cadastra uma nova venda na loja selecionada.
 
   Essa rota pode ser usada por qualquer usuário logado.
 
     Parâmetros:
 
       {
-        "id": 1,
-        "name": "Mouse gamer",
-        "description": "Mouse óptico rgb",
-        "price": 200,
-        "quantity": 10,
+        "quantitySold": 1,
+        "totalValue": 200,
+        "productId": 1,
         "storeId": 3
       }
 
     Retorno:
 
       {
-        "message": "Product updated"
+        "message": "Sale created successfully"
       }
 
-* `DELETE /` -> Remove um produto da loja.
+* `PUT / ` -> Altera uma venda da loja selecionada.
+
+  Essa rota pode ser usada por qualquer usuário logado.
+
+    Parâmetros:
+
+        {
+            "id": 1,
+            "quantitySold": 2,
+            "totalValue": 200,
+            "productId": 1,
+            "storeId": 3
+        }
+
+    Retorno:
+
+      {
+        "message": "Sale updated successfully"
+      }
+
+* `DELETE /` -> Remove uma venda da loja.
 
   Essa rota pode ser usada por qualquer usuário logado.
 
@@ -346,32 +349,32 @@ Este recurso permite a manipulação total das lojas cadastradas no banco de dad
     Retorno:
 
       {
-        "message": "Store removed"
+        "message": "Sale removed successfully"
       }
 
-* `GET /{id} ` -> Mostra o produto em específico cadastrado.
+* `GET /{id} ` -> Mostra uma venda em específica cadastrada.
 
   Essa rota pode ser usada por qualquer usuário logado.
 
     Parâmetro:
 
-      id -> número do produto
+      id da venda
 
 
     Se id = 1
 
     Retorno:
 
-      {
-        "id": 1,
-        "name": "Teclado mecânico",
-        "description": "Teclado antighost com rgb", // nullable
-        "price": 175.9,
-        "quantity": 20,
-        "storeId": 3
-      },
+        {
+            "id": 1,
+            "date": "2023-05-08T14:42:32.382Z",
+            "quantitySold": 2,
+            "totalValue": 200,
+            "productId": 1,
+            "storeId": 3
+        }
 
-* `GET /store/{storeId}` -> Mostra todos produtos cadastrados da loja.
+* `GET /store/{storeId}` -> Mostra todas as vendas cadastradas da loja.
 
   Essa rota pode ser usada por qualquer usuário logado.
 
@@ -381,22 +384,25 @@ Este recurso permite a manipulação total das lojas cadastradas no banco de dad
 
     Retorno:
 
-      [
+    [
         {
-          "id": 1,
-          "name": "Teclado mecânico",
-          "description": "Teclado antighost com rgb", // nullable
-          "price": 175.9,
-          "quantity": 20,
-          "storeId": 3
-        },
+            "id": 1,
+            "date": "2023-05-08T14:42:32.382Z",
+            "quantitySold": 2,
+            "totalValue": 200,
+            "productId": 1,
+            "storeId": 3,
+            "product": {
+            "id": 1,
+            "name": "Mouse gamer",
+            "description": "Mouse óptico rgb",
+            "price": 200,
+            "quantity": 5,
+            "storeId": 3
+            }
+        }
         ...
-      ]
-## Aprendizados
-
-Fortaleci meu conhecimento sobre uma arquiterura mais limpa de código e de possibilidade de escalá-la, fortifiquei meu conhecimento sobre TypeScript e também utilizei pela primeira vez o Prisma ORM, o qual adaptei superfácil, sendo uma ótima opção além do sequelize. Meus desafios foram a organização do banco de dados, como torná-lo objetivo e como modelá-lo. Além disso, pensar na estruta geral do código e seus comportamentos foi uma tarefa árdua também para começar algo do zero.
-
-
+    ]
 ## Stack utilizada
 
 **Back-end:** Node, Express, TypeScript, Prisma e MySQL
