@@ -396,25 +396,25 @@ Este recurso permite a manipulação total das lojas cadastradas no banco de dad
 
     Retorno:
 
-    [
-        {
-            "id": 1,
-            "date": "2023-05-08T14:42:32.382Z",
-            "quantitySold": 2,
-            "totalValue": 200,
-            "productId": 1,
-            "storeId": 3,
-            "product": {
-            "id": 1,
-            "name": "Mouse gamer",
-            "description": "Mouse óptico rgb",
-            "price": 200,
-            "quantity": 5,
-            "storeId": 3
-            }
-        }
-        ...
-    ]
+      [
+          {
+              "id": 1,
+              "date": "2023-05-08T14:42:32.382Z",
+              "quantitySold": 2,
+              "totalValue": 200,
+              "productId": 1,
+              "storeId": 3,
+              "product": {
+              "id": 1,
+              "name": "Mouse gamer",
+              "description": "Mouse óptico rgb",
+              "price": 200,
+              "quantity": 5,
+              "storeId": 3
+              }
+          }
+          ...
+      ]
 ## Stack utilizada
 
 **Back-end:** Node, Express, TypeScript, Prisma e MySQL
