@@ -2,9 +2,9 @@ import type { Request, Response, NextFunction } from 'express';
 import validatorInputs from '../helpers/validatorInputs';
 
 function validateCreateProduct(req: Request, res: Response, next: NextFunction): void {
-  const { name, description, price, quantity, storeId } = req.body;
+  const { name, price, quantity, storeId } = req.body;
 
-  const objInputs = { name, description, price, quantity, storeId };
+  const objInputs = { name, price, quantity, storeId };
 
   validatorInputs(objInputs);
 

@@ -1,4 +1,5 @@
 import type { StoreInput } from '../entities/Store';
+import ErrorApi from '../helpers/ErrorApi';
 import StoreService from '../services/StoreService';
 import type { Request, Response } from 'express';
 
@@ -30,6 +31,8 @@ class StoreController {
 
   async update(req: Request, res: Response): Promise<Response> {
     const store = req.body;
+
+    if (store.id == null) throw new ErrorApi('Id not found', 400);
     await this.service.update(store);
     return res.status(200).json({ message: 'Store updated' });
   }

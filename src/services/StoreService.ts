@@ -46,21 +46,30 @@ class StoreService {
 
     if (result === null) throw new ErrorApi('Store not found', 404);
 
-    await this._model.store.update({ where: { id }, data: { admin, name, email, password, address, phone } });
+    const pass = this._encode.encryptPassword(password);
+
+    await this._model.store.update({ where: { id }, data: { admin, name, email, password: pass, address, phone } });
   }
 
   async findByEmail(email: string): Promise<Store> {
     const result = await this._model.store.findFirst({ where: { email } });
+
+    if (result === null) throw new ErrorApi('Store not found', 404);
     return result as Store;
   }
 
   async findByName(name: string): Promise<Store> {
     const result = await this._model.store.findFirst({ where: { name } });
+
+    if (result === null) throw new ErrorApi('Store not found', 404);
+
     return result as Store;
   }
 
   async findById(storeId: number): Promise<Store | null> {
-    const store = await this._model.store.findUnique({ where: { id: storeId } });
+    const store = await this._model.store.findFirst({ where: { id: storeId } });
+
+    if (store === null) throw new ErrorApi('Store not found', 404);
     return store as Store;
   }
 }

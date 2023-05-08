@@ -41,7 +41,7 @@ class SaleService implements SaleRepository {
   }
 
   async getSalesByStore(storeId: number): Promise<Sale[]> {
-    const sales = await this._model.sale.findMany({ where: { storeId }, include: { product: true, store: true } });
+    const sales = await this._model.sale.findMany({ where: { storeId }, include: { product: true } });
 
     if (sales == null) throw new Error('Sales not found');
 
