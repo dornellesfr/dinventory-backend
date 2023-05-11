@@ -79,7 +79,6 @@ Alguns recursos estão disponíveis apenas para admin. Você pode entrar em cont
     Parâmetros pelo body da requisição:
       
       {
-        "name": "Test Store",
         "email": "test@test.com",
         "password": "dattebayo"
       }
@@ -87,7 +86,7 @@ Alguns recursos estão disponíveis apenas para admin. Você pode entrar em cont
     Retorna:
       
       {
-        "message": "Store created"
+        "token": "{tokenvalidandologin}"
       }
 
 
