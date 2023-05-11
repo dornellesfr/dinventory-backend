@@ -88,6 +88,8 @@ Alguns recursos estão disponíveis apenas para admin. Você pode entrar em cont
       {
         "token": "{tokenvalidandologin}"
       }
+      
+      * É válido por 5 dias cada token, você pode gerar o seu fazendo a mesma requisição com login e senha.
 
 
 #### `/store`
@@ -133,7 +135,6 @@ Este recurso permite a manipulação total das lojas cadastradas no banco de dad
         "message": "Store created"
       }
     
-    * É válido por 5 dias cada token, você pode gerar o seu fazendo a mesma requisição com login e senha.
 
 * `PUT /` -> Atualiza a loja as características das lojas.
 
