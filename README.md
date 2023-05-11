@@ -130,7 +130,7 @@ Este recurso permite a manipulação total das lojas cadastradas no banco de dad
     Retorna: 
 
       {
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RpbmdAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlN1ZYZWJUQlV5Q1NkLkRVd1ZuMXh1bWNBMDF1YkltcGhJQVN0bVltL3NtU1M1eXk3YVAuMiIsIm5hbWUiOiJUZXN0IFN0b3JlIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE2ODM0MDc4MDgsImV4cCI6MTY4Mzc1MzQwOH0.NERhRtOesimQuUVi41kHmSUpe3i6-OL941HQL9G8wc0"
+        "message": "Store created"
       }
     
     * É válido por 5 dias cada token, você pode gerar o seu fazendo a mesma requisição com login e senha.
